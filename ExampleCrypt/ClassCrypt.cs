@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Security.Cryptography;
 
 namespace ExampleCrypt
 {
 	/// <summary>
-	/// Singleton ClassCrypt
+	/// Singleton ClassCrypt.
 	/// </summary>
 	public sealed class ClassCrypt
 	{
@@ -17,7 +18,31 @@ namespace ExampleCrypt
 
 		#endregion
 
+		#region Public instances
+
+		/// <summary>
+		/// Instance of System.Security.Cryptography.Aes
+		/// </summary>
+		public Aes Aes { get; private set; } = Aes.Create();
+
+		/// <summary>
+		/// Instance of System.Security.Cryptography.Rijndael
+		/// </summary>
+		public Rijndael Rijndael { get; private set; } = Rijndael.Create();
+
+		/// <summary>
+		/// Instance of ClassCryptRijndael.
+		/// </summary>
 		public ClassCryptRijndael AlgorithmRijndael { get; private set; } = ClassCryptRijndael.Instance;
+
+		/// <summary>
+		/// Instance of ClassCryptAes.
+		/// </summary>
+		public ClassCryptAes AlgorithmAes { get; private set; } = ClassCryptAes.Instance; 
+		
+		#endregion
+
+		#region Public methods
 
 		/// <summary>
 		/// Present array of bytes how HEX string
@@ -33,13 +58,11 @@ namespace ExampleCrypt
 				foreach (char letter in byteArray)
 				{
 					int value = Convert.ToInt32(letter);
-					result += allowDash ? $"{value:X}-" : $"{value:X}";
+					result += allowDash ? $"{value:X2}-" : $"{value:X2}";
 				}
 				if (result.EndsWith("-"))
 					result = result.TrimEnd('-');
 			}
-			else
-				result = @"<null>";
 			return result;
 		}
 
@@ -53,19 +76,20 @@ namespace ExampleCrypt
 			byte[] result = new byte[0];
 			if (str != null)
 			{
-				if (!string.IsNullOrEmpty(str) && str != @"<null>")
+				if (!string.IsNullOrEmpty(str))
 				{
 					for (var i = 0; i < str.Length; i += 2)
 					{
-						var iValue = Convert.ToInt32(Convert.ToString(str[i] + Convert.ToString(str[i + 1])), 16);
 						Array.Resize(ref result, result.Length + 1);
-						result[result.Length - 1] = (byte)iValue;
+						result[result.Length - 1] = Convert.ToByte(str.Substring(i, 2), 16);
 						if (haveDash)
 							i++;
 					}
 				}
 			}
 			return result;
-		}
+		} 
+		
+		#endregion
 	}
 }

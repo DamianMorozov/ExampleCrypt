@@ -65,6 +65,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClassCrypt.cs" />
+    <Compile Include="ClassCryptAes.cs" />
     <Compile Include="ClassCryptRijndael.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

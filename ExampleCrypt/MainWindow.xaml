@@ -9,6 +9,7 @@
         Title="Examples of crypting algorithms" Height="200" Width="800" ResizeMode="NoResize">
     <Window.Resources>
         <collections:ArrayList x:Key="colAlgorithm">
+            <system:String>AES</system:String>
             <system:String>Rijndael</system:String>
         </collections:ArrayList>
     </Window.Resources>

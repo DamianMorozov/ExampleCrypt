@@ -5,17 +5,17 @@ using System.Security.Cryptography;
 namespace ExampleCrypt
 {
 	/// <summary>
-	/// Singleton ClassCryptRijndael.
+	/// Singleton ClassCryptAes.
 	/// </summary>
-	public sealed class ClassCryptRijndael
+	public sealed class ClassCryptAes
 	{
 		#region Singleton Lazy<T>
 
-		private static readonly Lazy<ClassCryptRijndael> _instance = new Lazy<ClassCryptRijndael>(() => new ClassCryptRijndael());
+		private static readonly Lazy<ClassCryptAes> _instance = new Lazy<ClassCryptAes>(() => new ClassCryptAes());
 
-		public static ClassCryptRijndael Instance { get { return _instance.Value; } }
+		public static ClassCryptAes Instance { get { return _instance.Value; } }
 
-		public ClassCryptRijndael() { }
+		public ClassCryptAes() { }
 
 		#endregion
 
@@ -29,14 +29,15 @@ namespace ExampleCrypt
 			if (IV == null || IV.Length <= 0)
 				throw new ArgumentNullException("IV");
 			byte[] encrypted;
-			// Create an Rijndael object with the specified key and IV.
-			using (Rijndael rijAlg = Rijndael.Create())
+
+			// Create an Aes object with the specified key and IV.
+			using (Aes aesAlg = Aes.Create())
 			{
-				rijAlg.Key = Key;
-				rijAlg.IV = IV;
+				aesAlg.Key = Key;
+				aesAlg.IV = IV;
 
 				// Create an encryptor to perform the stream transform.
-				ICryptoTransform encryptor = rijAlg.CreateEncryptor(rijAlg.Key, rijAlg.IV);
+				ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
 				// Create the streams used for encryption.
 				using (MemoryStream msEncrypt = new MemoryStream())
@@ -70,14 +71,14 @@ namespace ExampleCrypt
 			// Declare the string used to hold the decrypted text.
 			string plaintext = null;
 
-			// Create an Rijndael object with the specified key and IV.
-			using (Rijndael rijAlg = Rijndael.Create())
+			// Create an Aes object with the specified key and IV.
+			using (Aes aesAlg = Aes.Create())
 			{
-				rijAlg.Key = Key;
-				rijAlg.IV = IV;
+				aesAlg.Key = Key;
+				aesAlg.IV = IV;
 
 				// Create a decryptor to perform the stream transform.
-				ICryptoTransform decryptor = rijAlg.CreateDecryptor(rijAlg.Key, rijAlg.IV);
+				ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
 				// Create the streams used for decryption.
 				using (MemoryStream msDecrypt = new MemoryStream(cipherText))
@@ -91,7 +92,6 @@ namespace ExampleCrypt
 						}
 					}
 				}
-
 			}
 
 			return plaintext;

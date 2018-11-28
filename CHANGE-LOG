@@ -1,8 +1,12 @@
 ====================================================================================================
-Examples of crypting algorithms
-https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=netframework-4.7.2
+CHANGE LOG
 ====================================================================================================
-.NET Framework 4.7.2.
-C# 7.3
-WPF application
+28.11.2018
+----------
+[+] Work example for Rijndael encryption algorithm.
+[+] Work example for AES encryption algorithm.
+----------------------------------------------------------------------------------------------------
+27.11.2018
+----------
+Initial commit.
 ----------------------------------------------------------------------------------------------------
