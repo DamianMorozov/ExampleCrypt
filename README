@@ -2,7 +2,7 @@
 Examples of crypting algorithms
 https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rijndael?view=netframework-4.7.2
 ====================================================================================================
-.NET Framework 4.72.
+.NET Framework 4.7.2.
 C# 7.3
 WPF application
 ----------------------------------------------------------------------------------------------------
